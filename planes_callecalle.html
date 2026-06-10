@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Ads para Huevos del Calle Calle — Conejeros IA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#f8fafc; --white:#ffffff; --text:#0f172a; --mid:#1e3a5f;
+      --soft:#475569; --mute:#94a3b8; --mute2:#64748b;
+      --cyan:#0284c7; --cyan-d:#0369a1; --cyan-l:#e0f2fe; --cyan-m:#bae6fd;
+      --navy:#0f172a;
+      --red:#dc2626; --red-l:#fef2f2; --red-b:#fecaca;
+      --amber:#d97706; --amber-l:#fffbeb; --amber-b:#fde68a;
+      --green:#059669; --green-l:#ecfdf5; --green-b:#a7f3d0;
+      --border:#e2e8f0; --border-d:#cbd5e1;
+    }
+    body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+
+    /* ── PASSWORD GATE ── */
+    #pw-gate { position:fixed; inset:0; z-index:9999; background:var(--bg); display:flex; align-items:center; justify-content:center; }
+    #pw-box { background:#fff; border:1.5px solid var(--border); border-radius:20px; padding:48px 44px; text-align:center; max-width:380px; width:90%; box-shadow:0 8px 40px rgba(0,0,0,.08); }
+    #pw-box .pw-logo { font-size:36px; margin-bottom:18px; }
+    #pw-box h2 { font-size:20px; font-weight:800; color:var(--navy); margin-bottom:6px; }
+    #pw-box p { font-size:14px; color:var(--mute2); margin-bottom:24px; line-height:1.6; }
+    #pw-input { width:100%; padding:13px 16px; border:1.5px solid var(--border); border-radius:10px; font-family:'Inter',sans-serif; font-size:15px; color:var(--navy); outline:none; text-align:center; letter-spacing:2px; transition:border-color .2s; margin-bottom:12px; }
+    #pw-input:focus { border-color:var(--cyan); }
+    #pw-input.err { border-color:var(--red); animation:shake .3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    #pw-btn { width:100%; padding:13px; background:var(--cyan-d); color:#fff; font-size:15px; font-weight:700; font-family:'Inter',sans-serif; border:none; border-radius:10px; cursor:pointer; }
+    #pw-err-msg { font-size:13px; color:var(--red); margin-top:10px; min-height:18px; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width:740px; margin:0 auto; padding:0 28px 100px; }
+
+    /* ── HEADER ── */
+    .header { background:var(--navy); padding:72px 32px 64px; text-align:center; position:relative; overflow:hidden; }
+    .header::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(2,132,199,0.07) 1px, transparent 1px),linear-gradient(90deg,rgba(2,132,199,0.07) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; }
+    .header > * { position:relative; z-index:1; }
+    .header-brand { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:2.5px; color:var(--cyan); margin-bottom:28px; }
+    .header h1 { font-size:38px; font-weight:900; line-height:1.1; letter-spacing:-1px; color:#ffffff; margin-bottom:18px; }
+    .header h1 em { font-style:normal; color:var(--cyan); }
+    .header-desc { font-size:17px; color:#94a3b8; line-height:1.7; max-width:520px; margin:0 auto 32px; }
+    .header-tags { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+    .tag { display:inline-flex; align-items:center; gap:5px; padding:5px 14px; border-radius:100px; font-size:12px; font-weight:600; }
+    .tag-cyan  { background:rgba(2,132,199,.2); color:#7dd3fc; border:1px solid rgba(2,132,199,.3); }
+    .tag-green { background:rgba(5,150,105,.2); color:#6ee7b7; border:1px solid rgba(5,150,105,.3); }
+    .tag-gray  { background:rgba(255,255,255,.06); color:#94a3b8; border:1px solid rgba(255,255,255,.1); }
+
+    /* ── SECTIONS ── */
+    .section { background:var(--white); border-bottom:1px solid var(--border); padding:64px 32px; }
+    .section.bg-alt { background:var(--bg); }
+    .eyebrow { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--cyan); margin-bottom:12px; }
+    .eyebrow.green { color:var(--green); }
+    .eyebrow.amber { color:var(--amber); }
+    .eyebrow.red { color:var(--red); }
+    .section h2 { font-size:30px; font-weight:800; line-height:1.2; letter-spacing:-0.5px; color:var(--navy); margin-bottom:14px; }
+    .section h2 em { font-style:normal; color:var(--cyan-d); }
+    .section h2 .green { color:var(--green); }
+    .lead { font-size:16px; color:var(--soft); line-height:1.75; margin-bottom:36px; max-width:580px; }
+    .lead strong { color:var(--mid); font-weight:600; }
+
+    /* ── FUNNEL FLOW ── */
+    .funnel { display:flex; align-items:center; gap:0; flex-wrap:wrap; margin-bottom:28px; }
+    .funnel-step { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 18px; flex:1; min-width:120px; text-align:center; }
+    .funnel-step .fs-icon { font-size:22px; margin-bottom:6px; }
+    .funnel-step .fs-label { font-size:12px; font-weight:700; color:var(--navy); }
+    .funnel-step .fs-sub { font-size:11px; color:var(--mute2); margin-top:2px; }
+    .funnel-arrow { font-size:20px; color:var(--cyan-d); font-weight:700; padding:0 8px; flex-shrink:0; }
+    .funnel-unique { background:var(--cyan-l); border-color:var(--cyan-m); }
+    .funnel-unique .fs-label { color:var(--cyan-d); }
+
+    /* ── FEAT GRID ── */
+    .feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:8px; }
+    .feat-grid.cols3 { grid-template-columns:1fr 1fr 1fr; }
+    .feat-card { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:22px 20px; }
+    .feat-card .fc-icon { font-size:22px; margin-bottom:10px; }
+    .feat-card h3 { font-size:15px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+    .feat-card p { font-size:14px; color:var(--soft); line-height:1.6; }
+    .feat-card.c-cyan { border-top:3px solid var(--cyan-d); }
+    .feat-card.c-green { border-top:3px solid var(--green); }
+    .feat-card.c-amber { border-top:3px solid var(--amber); background:var(--amber-l); border:1px solid var(--amber-b); }
+    .feat-card.c-amber h3 { color:#92400e; }
+    .feat-card.c-amber p { color:#92400e; }
+    .feat-card.c-red { border-top:3px solid var(--red); background:var(--red-l); border:1px solid var(--red-b); }
+    .feat-card.c-red h3 { color:#991b1b; }
+    .feat-card.c-red p { color:#991b1b; }
+
+    /* ── PLAN SEPARATOR ── */
+    .plan-sep-banner { padding:44px 32px; text-align:center; }
+    .plan-sep-banner.unico { background:linear-gradient(135deg,var(--navy),#1e3a5f); border-bottom:1px solid #334155; border-top:2px solid var(--cyan-d); }
+    .plan-sep-banner .plan-num { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:3px; margin-bottom:10px; }
+    .plan-sep-banner.unico .plan-num { color:var(--cyan); }
+    .plan-sep-banner h2 { font-size:36px; font-weight:900; letter-spacing:-1px; margin-bottom:8px; }
+    .plan-sep-banner.unico h2 { color:#ffffff; }
+    .plan-sep-banner p { font-size:15px; max-width:520px; margin:0 auto; }
+    .plan-sep-banner.unico p { color:#94a3b8; }
+    .plan-sep-outcome { display:inline-block; margin-top:14px; padding:8px 20px; border-radius:100px; font-size:14px; font-weight:700; }
+    .plan-sep-banner.unico .plan-sep-outcome { background:var(--cyan-d); color:#fff; }
+
+    /* ── PRICING CARD ── */
+    .pricing-card { background:var(--navy); border-radius:22px; padding:48px 40px; position:relative; overflow:hidden; margin-bottom:20px; }
+    .pricing-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+    .pricing-card.unico::before { background:linear-gradient(90deg,var(--cyan-d),var(--cyan),#7c3aed); }
+    .pricing-card .pc-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; text-align:center; color:var(--cyan); }
+    .pricing-card .pc-main { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+    .pc-left { text-align:center; }
+    .pricing-card .pc-amount { font-family:'JetBrains Mono',monospace; font-size:56px; font-weight:700; line-height:1; letter-spacing:-2px; margin-bottom:4px; color:var(--cyan); }
+    .pricing-card .pc-period { font-size:13px; color:#64748b; margin-bottom:14px; }
+    .pricing-card .pc-setup-note { font-size:12px; color:#475569; padding:10px 14px; background:rgba(255,255,255,.04); border-radius:8px; border:1px solid rgba(255,255,255,.06); }
+    .pricing-card .pc-setup-note strong { color:#94a3b8; }
+    .pc-right { display:flex; flex-direction:column; gap:8px; }
+    .pc-row { display:flex; justify-content:space-between; align-items:center; padding:9px 12px; border-radius:8px; font-size:14px; }
+    .pc-row.muted { color:#64748b; }
+    .pc-row.muted .pr-val { color:#475569; }
+    .pc-row.highlighted { background:rgba(255,255,255,.05); }
+    .pc-row.highlighted .pr-label { color:#f1f5f9; font-weight:600; }
+    .pc-row.highlighted .pr-val { color:var(--cyan); font-weight:700; }
+    .pc-row .pr-label { color:#94a3b8; }
+    .pc-row .pr-val { color:#f1f5f9; font-weight:600; }
+    .pc-total-box { margin-top:10px; padding:16px 18px; border-radius:12px; background:rgba(6,182,212,.1); border:1px solid rgba(6,182,212,.2); }
+    .pc-total-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; color:var(--cyan); }
+    .pc-total-val { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:700; color:var(--cyan); }
+    .pc-total-sub { font-size:12px; color:#64748b; margin-top:3px; }
+
+    /* ── WEB BOX ── */
+    .web-option-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+    .web-option { border-radius:16px; padding:28px 24px; text-align:center; position:relative; }
+    .web-option.con-web { background:linear-gradient(135deg,#0f172a,#1e3a5f); border:2px solid var(--cyan-d); }
+    .web-option.sin-web { background:var(--bg); border:1.5px solid var(--border-d); }
+    .web-option .wo-badge { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; padding:4px 12px; border-radius:100px; margin-bottom:14px; display:inline-block; }
+    .web-option.con-web .wo-badge { background:rgba(2,132,199,.2); color:var(--cyan); border:1px solid rgba(2,132,199,.3); }
+    .web-option.sin-web .wo-badge { background:rgba(100,116,139,.15); color:var(--mute2); border:1px solid var(--border); }
+    .web-option .wo-price { font-family:'JetBrains Mono',monospace; font-size:40px; font-weight:700; line-height:1; margin-bottom:4px; }
+    .web-option.con-web .wo-price { color:var(--cyan); }
+    .web-option.sin-web .wo-price { color:var(--navy); }
+    .web-option .wo-period { font-size:12px; color:var(--mute2); margin-bottom:14px; }
+    .web-option .wo-desc { font-size:13px; line-height:1.65; }
+    .web-option.con-web .wo-desc { color:#94a3b8; }
+    .web-option.sin-web .wo-desc { color:var(--soft); }
+    .web-rec { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--cyan-d); color:#fff; font-size:11px; font-weight:700; padding:4px 14px; border-radius:100px; white-space:nowrap; }
+
+    /* ── WEB IMPORTANCIA ── */
+    .web-importance { background:var(--cyan-l); border:1.5px solid var(--cyan-m); border-left:5px solid var(--cyan-d); border-radius:0 16px 16px 0; padding:28px 32px; margin-bottom:28px; }
+    .web-importance .wi-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--cyan-d); margin-bottom:10px; }
+    .web-importance h3 { font-size:19px; font-weight:800; color:var(--navy); margin-bottom:10px; }
+    .web-importance p { font-size:15px; color:var(--mid); line-height:1.75; }
+    .web-importance p strong { color:var(--navy); }
+
+    /* ── ROI BOX ── */
+    .roi-box { background:var(--green-l); border:1.5px solid var(--green-b); border-radius:14px; padding:24px 28px; margin-top:20px; }
+    .roi-box .roi-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--green); margin-bottom:10px; }
+    .roi-box h3 { font-size:16px; font-weight:800; color:#065f46; margin-bottom:6px; }
+    .roi-box p { font-size:14px; color:#047857; line-height:1.65; }
+    .roi-box p strong { color:#065f46; }
+
+    /* ── QUOTE ── */
+    .quote-box { border-left:4px solid var(--cyan-d); border-radius:0 14px 14px 0; padding:22px 26px; margin:24px 0; }
+    .quote-box.cyan { background:var(--cyan-l); }
+    .quote-box.amber { background:var(--amber-l); border-left-color:var(--amber); }
+    .quote-box.green { background:var(--green-l); border-left-color:var(--green); }
+    .quote-box p { font-size:16px; color:var(--mid); line-height:1.7; font-style:italic; }
+    .quote-box p strong { font-style:normal; color:var(--navy); }
+    .quote-box.amber p { color:#92400e; }
+    .quote-box.amber p strong { color:#78350f; }
+
+    /* ── FEE BOX ── */
+    .fee-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
+    .fee-box { border-radius:12px; padding:22px 20px; }
+    .fee-box.cyan { background:var(--cyan-l); border:1px solid var(--cyan-m); }
+    .fee-box.green { background:var(--green-l); border:1px solid var(--green-b); }
+    .fee-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px; }
+    .fee-box.cyan .fee-label { color:var(--cyan-d); }
+    .fee-box.green .fee-label { color:var(--green); }
+    .fee-box h3 { font-size:15px; font-weight:800; color:var(--navy); margin-bottom:6px; }
+    .fee-box p { font-size:13px; color:var(--soft); line-height:1.6; }
+    .fee-box p strong { color:var(--mid); }
+
+    /* ── TIMELINE ── */
+    .tl { display:flex; flex-direction:column; }
+    .tl-item { display:flex; gap:22px; padding-bottom:30px; }
+    .tl-item:last-child { padding-bottom:0; }
+    .tl-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:42px; }
+    .tl-dot { width:42px; height:42px; border-radius:50%; background:var(--cyan-l); border:2px solid var(--cyan-m); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; font-family:'JetBrains Mono',monospace; color:var(--cyan-d); }
+    .tl-line { flex:1; width:2px; background:var(--border); margin-top:6px; }
+    .tl-item:last-child .tl-line { display:none; }
+    .tl-content { padding-top:8px; flex:1; }
+    .tl-week { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--cyan); margin-bottom:4px; }
+    .tl-title { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+    .tl-desc { font-size:14px; color:var(--soft); line-height:1.65; }
+
+    /* ── CTA ── */
+    .cta-section { background:var(--navy); padding:72px 32px; text-align:center; position:relative; overflow:hidden; }
+    .cta-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(2,132,199,.12) 0%,transparent 60%); }
+    .cta-section > * { position:relative; z-index:1; }
+    .cta-section h2 { font-size:34px; font-weight:900; color:#fff; margin-bottom:14px; letter-spacing:-0.5px; }
+    .cta-section h2 em { font-style:normal; color:var(--cyan); }
+    .cta-section p { font-size:16px; color:#94a3b8; margin-bottom:36px; line-height:1.7; }
+    .cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; }
+    .btn-pro { display:inline-block; padding:17px 36px; border-radius:12px; font-size:16px; font-weight:800; background:linear-gradient(135deg,var(--cyan-d),var(--cyan)); color:#fff; text-decoration:none; border:none; cursor:pointer; font-family:'Inter',sans-serif; box-shadow:0 4px 20px rgba(2,132,199,.4); }
+    .btn-dudas { padding:12px 22px; border-radius:10px; font-size:13px; font-weight:700; font-family:'Inter',sans-serif; border:1px solid rgba(245,158,11,.3); background:rgba(245,158,11,.1); color:#fbbf24; cursor:pointer; }
+    .cta-contact { font-size:13px; color:#475569; line-height:2; }
+    .cta-contact strong { color:#64748b; }
+    .cta-rec-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--cyan); margin-bottom:10px; }
+
+    /* ── MODAL ── */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:200; align-items:center; justify-content:center; padding:20px; }
+    .modal-overlay.open { display:flex; }
+    .modal-box { background:#fff; border-radius:20px; padding:36px 32px; max-width:480px; width:100%; box-shadow:0 24px 60px rgba(0,0,0,.2); }
+    .modal-title { font-size:20px; font-weight:800; color:var(--navy); margin-bottom:8px; }
+    .modal-sub { font-size:14px; color:var(--soft); margin-bottom:20px; line-height:1.6; }
+    .modal-textarea { width:100%; border:1.5px solid var(--border-d); border-radius:10px; padding:14px 16px; font-family:'Inter',sans-serif; font-size:15px; color:var(--navy); resize:vertical; min-height:110px; outline:none; line-height:1.6; transition:border-color .2s; }
+    .modal-textarea:focus { border-color:var(--cyan); }
+    .modal-actions { display:flex; gap:10px; margin-top:16px; }
+    .btn-ws { flex:1; padding:13px 20px; background:#25d366; color:#fff; font-size:15px; font-weight:700; border:none; border-radius:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; font-family:'Inter',sans-serif; }
+    .btn-cancel { padding:13px 18px; background:var(--bg); color:var(--soft); font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:10px; cursor:pointer; font-family:'Inter',sans-serif; }
+
+    @media (max-width:620px) {
+      .header h1 { font-size:26px; }
+      .wrap { padding:0 16px 80px; }
+      .section { padding:48px 20px; }
+      .feat-grid, .feat-grid.cols3, .fee-grid, .web-option-grid { grid-template-columns:1fr; }
+      .funnel { flex-direction:column; align-items:stretch; }
+      .funnel-arrow { text-align:center; padding:4px 0; transform:rotate(90deg); }
+      .pricing-card .pc-main { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="pw-gate">
+  <div id="pw-box">
+    <div class="pw-logo">🥚</div>
+    <h2>Propuesta Meta Ads</h2>
+    <p>Huevos del Calle Calle · Conejeros IA<br>Ingresa la contraseña para continuar.</p>
+    <input id="pw-input" type="password" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkPw()">
+    <button id="pw-btn" onclick="checkPw()">Acceder →</button>
+    <div id="pw-err-msg"></div>
+  </div>
+</div>
+<script>
+function checkPw() {
+  if (document.getElementById('pw-input').value === 'callecalle123') {
+    document.getElementById('pw-gate').style.display = 'none';
+  } else {
+    var inp = document.getElementById('pw-input');
+    inp.classList.add('err');
+    document.getElementById('pw-err-msg').textContent = 'Contraseña incorrecta';
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('err'), 400);
+  }
+}
+</script>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-brand">🎯 Conejeros IA · Huevos del Calle Calle</div>
+  <h1>Pedidos nuevos cada mes,<br><em>desde el anuncio hasta el delivery.</em></h1>
+  <p class="header-desc">Meta Ads con creativos de IA, renovados constantemente. Anuncios que llevan directo a WhatsApp para que los pedidos lleguen solos.</p>
+  <div class="header-tags">
+    <span class="tag tag-cyan">Propuesta comercial</span>
+    <span class="tag tag-green">● Delivery de huevos</span>
+    <span class="tag tag-gray">Junio 2026</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- S1: METODOLOGÍA -->
+<section class="section">
+  <div class="eyebrow">Cómo trabajamos</div>
+  <h2>Un anuncio distinto<br><em>para cada persona</em></h2>
+  <p class="lead">No hacemos "un anuncio para todos". <strong>Dividimos al público en 3 grupos y a cada grupo le mostramos mensajes y fotos distintos.</strong></p>
+  <div class="feat-grid cols3" style="margin-bottom:28px;">
+    <div class="feat-card c-cyan">
+      <div class="fc-icon">❄️</div>
+      <h3>Público frío</h3>
+      <p>No conoce el negocio. Ve una foto llamativa con precio claro para que conozca Huevos del Calle Calle y haga su primer pedido.</p>
+    </div>
+    <div class="feat-card c-amber">
+      <div class="fc-icon">🌤️</div>
+      <h3>Público tibio</h3>
+      <p>Ya nos vio pero no escribió. Recibe otro mensaje: frescura del producto, origen, opiniones de otros clientes.</p>
+    </div>
+    <div class="feat-card c-red">
+      <div class="fc-icon">🔥</div>
+      <h3>Público caliente</h3>
+      <p>Escribió pero no pidió. Recibe una oferta concreta con fecha límite para que haga su pedido ahora.</p>
+    </div>
+  </div>
+  <div class="eyebrow" style="margin-bottom:14px;">Todos los anuncios terminan en el mismo lugar</div>
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="fs-icon">📣</div>
+      <div class="fs-label">Anuncio Meta</div>
+      <div class="fs-sub">Instagram o Facebook</div>
+    </div>
+    <div class="funnel-arrow">→</div>
+    <div class="funnel-step funnel-unique">
+      <div class="fs-icon">🌐</div>
+      <div class="fs-label">Web (opcional)</div>
+      <div class="fs-sub">Filtra y convence</div>
+    </div>
+    <div class="funnel-arrow">→</div>
+    <div class="funnel-step funnel-unique">
+      <div class="fs-icon">💬</div>
+      <div class="fs-label">WhatsApp</div>
+      <div class="fs-sub">Pedido directo</div>
+    </div>
+    <div class="funnel-arrow">→</div>
+    <div class="funnel-step">
+      <div class="fs-icon">🚚</div>
+      <div class="fs-label">Delivery</div>
+      <div class="fs-sub">Cliente recibe</div>
+    </div>
+  </div>
+  <div class="quote-box cyan">
+    <p>El anuncio lleva a la web o directo a WhatsApp. <strong>La web filtra a los clientes más interesados antes de que escriban, lo que sube la tasa de conversión.</strong></p>
+  </div>
+</section>
+
+<!-- S2: LO QUE FALTA -->
+<section class="section bg-alt">
+  <div class="eyebrow red">Lo que falta hoy</div>
+  <h2>El producto es bueno.<br>Le falta visibilidad.</h2>
+  <p class="lead">Sin pauta activa, el negocio depende 100% del boca a boca y de que alguien te encuentre por casualidad en Instagram.</p>
+  <div class="feat-grid cols3">
+    <div class="feat-card c-red">
+      <div class="fc-icon">⚙️</div>
+      <h3>Sin píxel en Meta</h3>
+      <p>Meta no aprende de los resultados. La pauta gasta sin datos que la mejoren.</p>
+    </div>
+    <div class="feat-card c-red">
+      <div class="fc-icon">🎨</div>
+      <h3>Sin creativos nuevos</h3>
+      <p>Un anuncio se satura en 2–3 semanas. Sin renovación, el costo por pedido sube semana a semana.</p>
+    </div>
+    <div class="feat-card c-red">
+      <div class="fc-icon">🔄</div>
+      <h3>Sin seguimiento</h3>
+      <p>Los que vieron el anuncio pero no escribieron se pierden para siempre.</p>
+    </div>
+  </div>
+  <div class="quote-box amber">
+    <p>Otros negocios de delivery de la zona ya están pautando. <strong>Cada mes sin esto son pedidos que se van a la competencia.</strong></p>
+  </div>
+</section>
+
+<!-- S3: CREATIVOS -->
+<section class="section">
+  <div class="eyebrow">Cómo lo producimos</div>
+  <h2>Creativos con IA,<br><em>renovados constantemente</em></h2>
+  <p class="lead">Usamos IA para generar fotos profesionales del producto. Más creativos, renovados constantemente, a una fracción del costo de una agencia. Cada anuncio tiene un ángulo distinto:</p>
+  <div style="background:var(--navy); border-radius:16px; padding:28px 32px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; margin-bottom:28px;">
+    <div style="text-align:center; padding:0 16px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:42px; font-weight:700; color:var(--cyan); line-height:1;">~10</div>
+      <div style="font-size:13px; color:#94a3b8; margin-top:6px; font-weight:600;">fotos por campaña<br><span style="color:#475569; font-weight:400; font-size:12px;">renovadas fin de mes</span></div>
+    </div>
+    <div style="text-align:center; padding:0 16px; border-left:1px solid rgba(255,255,255,.08); border-right:1px solid rgba(255,255,255,.08);">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:42px; font-weight:700; color:#34d399; line-height:1;">2</div>
+      <div style="font-size:13px; color:#94a3b8; margin-top:6px; font-weight:600;">campañas activas<br><span style="color:#475569; font-weight:400; font-size:12px;">ventas + reconocimiento</span></div>
+    </div>
+    <div style="text-align:center; padding:0 16px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:42px; font-weight:700; color:#fbbf24; line-height:1;">∞</div>
+      <div style="font-size:13px; color:#94a3b8; margin-top:6px; font-weight:600;">renovaciones<br><span style="color:#475569; font-weight:400; font-size:12px;">cuando un anuncio se cansa</span></div>
+    </div>
+  </div>
+
+  <!-- REVISIÓN FIN DE MES -->
+  <div style="background:var(--green-l); border:1.5px solid var(--green-b); border-left:5px solid var(--green); border-radius:0 14px 14px 0; padding:24px 28px;">
+    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--green); margin-bottom:8px;">📊 Revisión mensual de creativos</div>
+    <p style="font-size:15px; color:#065f46; line-height:1.75;">Al final de cada mes revisamos qué fotos funcionaron mejor. <strong style="color:#065f46;">Las que trajeron más pedidos se potencian; las que no convirtieron se reemplazan por creativos nuevos.</strong> Así el rendimiento mejora mes a mes.</p>
+  </div>
+</section>
+
+<!-- S4: DOS MONTOS -->
+<section class="section bg-alt">
+  <div class="eyebrow">Antes del precio</div>
+  <h2>Dos montos distintos,<br>sin confusión</h2>
+  <div class="fee-grid">
+    <div class="fee-box cyan">
+      <div class="fee-label">Gasto 1 — Pauta</div>
+      <h3>💳 Va a Meta</h3>
+      <p>Lo que Meta cobra por mostrar los anuncios. Lo paga el negocio <strong>con su propia tarjeta, directo a Meta</strong>. Nosotros nunca tocamos esa plata.</p>
+    </div>
+    <div class="fee-box green">
+      <div class="fee-label">Gasto 2 — Honorario</div>
+      <h3>🧾 Va a nosotros</h3>
+      <p>Lo que nos pagan por crear anuncios, configurar campañas, optimizar y reportar. <strong>Monto fijo mensual, sin sorpresas.</strong></p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<!-- SEPARADOR PLAN ÚNICO -->
+<div class="plan-sep-banner unico">
+  <div class="plan-num">Plan único</div>
+  <h2>Plan Delivery · "Activado"</h2>
+  <p>Todo lo necesario para que lleguen pedidos por Meta y los clientes escriban directo por WhatsApp.</p>
+  <div class="plan-sep-outcome">🚚 Más pedidos cada mes</div>
+</div>
+
+<div class="wrap">
+
+<!-- S5: QUÉ INCLUYE -->
+<section class="section">
+  <div class="eyebrow cyan">Plan Delivery · Qué incluye</div>
+  <h2>Todo lo necesario para<br><em>arrancar y medir</em></h2>
+  <div class="feat-grid cols3">
+    <div class="feat-card c-cyan">
+      <div class="fc-icon">💬</div>
+      <h3>2 campañas activas</h3>
+      <p>Ventas por WhatsApp + Reconocimiento de marca. Las dos mandan directo al WhatsApp del negocio.</p>
+    </div>
+    <div class="feat-card c-cyan">
+      <div class="fc-icon">🖼️</div>
+      <h3>10 fotos por campaña</h3>
+      <p>Creativos con distintos ángulos: precio, frescura, origen. Renovación constante para que Meta no los queme.</p>
+    </div>
+    <div class="feat-card c-cyan">
+      <div class="fc-icon">🔧</div>
+      <h3>Optimización mensual</h3>
+      <p>Revisamos qué funciona, eliminamos lo que no y reemplazamos los creativos al final del mes.</p>
+    </div>
+    <div class="feat-card c-cyan">
+      <div class="fc-icon">🏗️</div>
+      <h3>Setup técnico completo</h3>
+      <p>Píxel, audiencias y configuración de campañas listos en la semana 1.</p>
+    </div>
+    <div class="feat-card c-cyan">
+      <div class="fc-icon">📋</div>
+      <h3>Reporte mensual</h3>
+      <p>Cuántas personas escribieron, cuántos pidieron, cuánto costó cada pedido y qué viene el mes siguiente.</p>
+    </div>
+    <div class="feat-card c-cyan">
+      <div class="fc-icon">📊</div>
+      <h3>Revisión de fotos fin de mes</h3>
+      <p>Las fotos que más convirtieron se potencian. Las que no funcionaron se reemplazan por otras nuevas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S6: WEB -->
+<section class="section bg-alt">
+  <div class="eyebrow amber">Potencia el plan con una web</div>
+  <h2>¿Con web o sin web?<br><em>Tú decides</em></h2>
+
+  <div class="web-importance">
+    <div class="wi-eyebrow">🌐 Por qué importa la web</div>
+    <h3>La web filtra a los clientes más interesados antes de que escriban</h3>
+    <p>Cuando alguien ve tu anuncio, una parte va a pasar directo a WhatsApp y otra va a querer saber más antes. <strong>La web recibe a esos clientes potenciales, les muestra precios, zonas de delivery y los convence</strong> — y solo los más decididos terminan escribiendo. Eso significa menos conversaciones que no llegan a nada y más pedidos reales.</p>
+  </div>
+
+  <div class="web-option-grid">
+    <div class="web-option con-web" style="position:relative;">
+      <div class="web-rec">⭐ Recomendado</div>
+      <div class="wo-badge">Con web</div>
+      <div class="wo-price">$99.000</div>
+      <div class="wo-period">al mes · honorario total</div>
+      <div class="wo-desc">Incluye creación de la web + campañas Meta + creativos + optimización mensual + reporte.</div>
+    </div>
+    <div class="web-option sin-web">
+      <div class="wo-badge">Sin web</div>
+      <div class="wo-price">$75.000</div>
+      <div class="wo-period">al mes · honorario total</div>
+      <div class="wo-desc">Solo campañas Meta + creativos + optimización mensual + reporte. Los anuncios llevan directo a WhatsApp.</div>
+    </div>
+  </div>
+
+  <div class="quote-box cyan">
+    <p>En ambos casos la pauta a Meta va aparte y la pagas directamente con tu tarjeta. <strong>El honorario es solo lo que nos pagas a nosotros.</strong></p>
+  </div>
+</section>
+
+
+
+<!-- S8: CRONOGRAMA -->
+<section class="section bg-alt">
+  <div class="eyebrow">El primer mes</div>
+  <h2>Qué pasa <em>semana a semana</em></h2>
+  <p class="lead">Del acuerdo a campañas activas en menos de 7 días.</p>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot">S1</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-week">Semana 1</div>
+        <div class="tl-title">Setup técnico — tú no haces nada</div>
+        <div class="tl-desc">Configuramos el píxel, audiencias, y si eligiste la web, la dejamos lista. Generamos los primeros creativos con IA.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot">S2</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-week">Semana 2</div>
+        <div class="tl-title">Campañas activas — Meta empieza a aprender</div>
+        <div class="tl-desc">Los anuncios se publican. Meta entra en su fase de aprendizaje de 7 días. No se toca nada hasta que termine.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot">S3</div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <div class="tl-week">Semana 3</div>
+        <div class="tl-title">Primera optimización</div>
+        <div class="tl-desc">Cortamos lo que no convierte, escalamos lo que sí. Los primeros pedidos nuevos ya deberían estar llegando.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-dot">S4</div></div>
+      <div class="tl-content">
+        <div class="tl-week">Semana 4</div>
+        <div class="tl-title">Primer reporte + revisión de fotos</div>
+        <div class="tl-desc">Cuántas personas escribieron, cuántos pidieron, cuánto costó cada pedido. Revisamos qué fotos funcionaron y reemplazamos las que no.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:20px; font-size:13px; color:var(--mute2); text-align:center;">Contrato de 3 meses con renovación. Después puede cancelar con 30 días de aviso.</p>
+</section>
+
+</div><!-- /wrap -->
+
+<!-- MODAL DUDAS -->
+<div class="modal-overlay" id="modalDudas" onclick="if(event.target===this)cerrarModal()">
+  <div class="modal-box">
+    <div class="modal-title">💬 Escribe tu duda</div>
+    <div class="modal-sub">Te respondo por WhatsApp lo antes posible.</div>
+    <textarea class="modal-textarea" id="dudaTexto" placeholder="Ej: ¿La web queda lista en la semana 1? ¿Cuándo podemos empezar?"></textarea>
+    <div class="modal-actions">
+      <button class="btn-ws" onclick="enviarDuda()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.847L.057 23.707a.5.5 0 00.609.61l5.9-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.877 9.877 0 01-5.031-1.378l-.36-.214-3.732.926.945-3.653-.234-.375A9.862 9.862 0 012.118 12C2.118 6.54 6.54 2.118 12 2.118S21.882 6.54 21.882 12 17.46 21.882 12 21.882z"/></svg>
+        Enviar por WhatsApp
+      </button>
+      <button class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-rec-label">🥚 Huevos del Calle Calle</div>
+  <h2>¿Arrancamos con<br>el <em>Plan Delivery</em>?</h2>
+  <p>Tienes el producto, tienes el delivery.<br>Solo falta el combustible para que lleguen más pedidos cada mes.</p>
+  <div class="cta-btns">
+    <a href="mailto:lukas.conejero40@gmail.com?subject=Meta Ads Calle Calle - Con Web&body=Hola Lukas, quiero arrancar con el Plan Delivery con web." class="btn-pro">🌐 Quiero el plan con web · $99.000/mes</a>
+  </div>
+  <div style="margin-bottom:28px;">
+    <button onclick="abrirModal()" class="btn-dudas">💬 Tengo preguntas primero</button>
+  </div>
+  <div class="cta-contact">
+    <strong>Lukas Conejeros · Conejeros IA</strong><br>
+    lukas.conejero40@gmail.com · +56 9 9906 6071<br>
+  </div>
+</div>
+
+<script>
+  function abrirModal() { document.getElementById('modalDudas').classList.add('open'); setTimeout(()=>document.getElementById('dudaTexto').focus(),100); }
+  function cerrarModal() { document.getElementById('modalDudas').classList.remove('open'); }
+  function enviarDuda() {
+    var texto = document.getElementById('dudaTexto').value.trim();
+    if (!texto) { document.getElementById('dudaTexto').focus(); return; }
+    window.open('https://wa.me/56999066071?text=' + encodeURIComponent('Hola Lukas, tengo una pregunta sobre la propuesta de Meta Ads para Huevos del Calle Calle:\n\n' + texto), '_blank');
+    cerrarModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
+</script>
+
+</body>
+</html>
