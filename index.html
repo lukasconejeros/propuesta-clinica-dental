@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meta Ads para Huevos del Calle Calle — Conejeros IA</title>
+  <title>Propuesta Meta Ads — Conejeros IA</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,19 +18,6 @@
       --border:#e2e8f0; --border-d:#cbd5e1;
     }
     body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased; }
-
-    /* ── PASSWORD GATE ── */
-    #pw-gate { position:fixed; inset:0; z-index:9999; background:var(--bg); display:flex; align-items:center; justify-content:center; }
-    #pw-box { background:#fff; border:1.5px solid var(--border); border-radius:20px; padding:48px 44px; text-align:center; max-width:380px; width:90%; box-shadow:0 8px 40px rgba(0,0,0,.08); }
-    #pw-box .pw-logo { font-size:36px; margin-bottom:18px; }
-    #pw-box h2 { font-size:20px; font-weight:800; color:var(--navy); margin-bottom:6px; }
-    #pw-box p { font-size:14px; color:var(--mute2); margin-bottom:24px; line-height:1.6; }
-    #pw-input { width:100%; padding:13px 16px; border:1.5px solid var(--border); border-radius:10px; font-family:'Inter',sans-serif; font-size:15px; color:var(--navy); outline:none; text-align:center; letter-spacing:2px; transition:border-color .2s; margin-bottom:12px; }
-    #pw-input:focus { border-color:var(--cyan); }
-    #pw-input.err { border-color:var(--red); animation:shake .3s; }
-    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-    #pw-btn { width:100%; padding:13px; background:var(--cyan-d); color:#fff; font-size:15px; font-weight:700; font-family:'Inter',sans-serif; border:none; border-radius:10px; cursor:pointer; }
-    #pw-err-msg { font-size:13px; color:var(--red); margin-top:10px; min-height:18px; }
 
     /* ── LAYOUT ── */
     .wrap { max-width:740px; margin:0 auto; padding:0 28px 100px; }
@@ -230,40 +217,15 @@
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
-<div id="pw-gate">
-  <div id="pw-box">
-    <div class="pw-logo">🥚</div>
-    <h2>Propuesta Meta Ads</h2>
-    <p>Huevos del Calle Calle · Conejeros IA<br>Ingresa la contraseña para continuar.</p>
-    <input id="pw-input" type="password" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkPw()">
-    <button id="pw-btn" onclick="checkPw()">Acceder →</button>
-    <div id="pw-err-msg"></div>
-  </div>
-</div>
-<script>
-function checkPw() {
-  if (document.getElementById('pw-input').value === 'callecalle123') {
-    document.getElementById('pw-gate').style.display = 'none';
-  } else {
-    var inp = document.getElementById('pw-input');
-    inp.classList.add('err');
-    document.getElementById('pw-err-msg').textContent = 'Contraseña incorrecta';
-    inp.value = '';
-    setTimeout(() => inp.classList.remove('err'), 400);
-  }
-}
-</script>
-
 <!-- HEADER -->
 <header class="header">
-  <div class="header-brand">🎯 Conejeros IA · Huevos del Calle Calle</div>
+  <div class="header-brand">🎯 Conejeros IA · Meta Ads</div>
   <h1>Pedidos nuevos cada mes,<br><em>desde el anuncio hasta el delivery.</em></h1>
-  <p class="header-desc">Meta Ads con creativos de IA, renovados constantemente. Anuncios que llevan directo a WhatsApp para que los pedidos lleguen solos.</p>
+  <p class="header-desc">Meta Ads con creativos de IA, renovados constantemente. Los anuncios aparecen en el Facebook e Instagram de tus clientes y los llevan directo a tu WhatsApp para que los pedidos lleguen solos.</p>
   <div class="header-tags">
     <span class="tag tag-cyan">Propuesta comercial</span>
-    <span class="tag tag-green">● Delivery de huevos</span>
-    <span class="tag tag-gray">Junio 2026</span>
+    <span class="tag tag-green">● Negocios de delivery</span>
+    <span class="tag tag-gray">2026</span>
   </div>
 </header>
 
@@ -278,7 +240,7 @@ function checkPw() {
     <div class="feat-card c-cyan">
       <div class="fc-icon">❄️</div>
       <h3>Público frío</h3>
-      <p>No conoce el negocio. Ve una foto llamativa con precio claro para que conozca Huevos del Calle Calle y haga su primer pedido.</p>
+      <p>No conoce el negocio. Ve una foto llamativa con precio claro para que conozca tu negocio y haga su primer pedido.</p>
     </div>
     <div class="feat-card c-amber">
       <div class="fc-icon">🌤️</div>
@@ -357,7 +319,7 @@ function checkPw() {
   <div style="background:var(--navy); border-radius:16px; padding:28px 32px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; margin-bottom:28px;">
     <div style="text-align:center; padding:0 16px;">
       <div style="font-family:'JetBrains Mono',monospace; font-size:42px; font-weight:700; color:var(--cyan); line-height:1;">~10</div>
-      <div style="font-size:13px; color:#94a3b8; margin-top:6px; font-weight:600;">fotos por campaña<br><span style="color:#475569; font-weight:400; font-size:12px;">renovadas fin de mes</span></div>
+      <div style="font-size:13px; color:#94a3b8; margin-top:6px; font-weight:600;">fotos por campaña<br><span style="color:#475569; font-weight:400; font-size:12px;">renovadas cada semana</span></div>
     </div>
     <div style="text-align:center; padding:0 16px; border-left:1px solid rgba(255,255,255,.08); border-right:1px solid rgba(255,255,255,.08);">
       <div style="font-family:'JetBrains Mono',monospace; font-size:42px; font-weight:700; color:#34d399; line-height:1;">2</div>
@@ -369,10 +331,10 @@ function checkPw() {
     </div>
   </div>
 
-  <!-- REVISIÓN FIN DE MES -->
+  <!-- SEGUIMIENTO SEMANAL -->
   <div style="background:var(--green-l); border:1.5px solid var(--green-b); border-left:5px solid var(--green); border-radius:0 14px 14px 0; padding:24px 28px;">
-    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--green); margin-bottom:8px;">📊 Revisión mensual de creativos</div>
-    <p style="font-size:15px; color:#065f46; line-height:1.75;">Al final de cada mes revisamos qué fotos funcionaron mejor. <strong style="color:#065f46;">Las que trajeron más pedidos se potencian; las que no convirtieron se reemplazan por creativos nuevos.</strong> Así el rendimiento mejora mes a mes.</p>
+    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--green); margin-bottom:8px;">📊 Seguimiento y optimización semanal</div>
+    <p style="font-size:15px; color:#065f46; line-height:1.75;">Todas las semanas revisamos qué fotos y anuncios están funcionando mejor. <strong style="color:#065f46;">Las que traen más pedidos se potencian; las que no convierten se reemplazan por creativos nuevos.</strong> Así el rendimiento mejora semana a semana, no una vez al mes.</p>
   </div>
 </section>
 
@@ -414,7 +376,7 @@ function checkPw() {
     <div class="feat-card c-cyan">
       <div class="fc-icon">💬</div>
       <h3>2 campañas activas</h3>
-      <p>Ventas por WhatsApp + Reconocimiento de marca. Las dos mandan directo al WhatsApp del negocio.</p>
+      <p>Ventas por WhatsApp + Reconocimiento de marca. Los anuncios aparecen en Facebook e Instagram y mandan directo a tu WhatsApp.</p>
     </div>
     <div class="feat-card c-cyan">
       <div class="fc-icon">🖼️</div>
@@ -423,8 +385,8 @@ function checkPw() {
     </div>
     <div class="feat-card c-cyan">
       <div class="fc-icon">🔧</div>
-      <h3>Optimización mensual</h3>
-      <p>Revisamos qué funciona, eliminamos lo que no y reemplazamos los creativos al final del mes.</p>
+      <h3>Optimización semanal</h3>
+      <p>Cada semana revisamos qué funciona, cortamos lo que no y ajustamos los creativos. No esperamos a fin de mes.</p>
     </div>
     <div class="feat-card c-cyan">
       <div class="fc-icon">🏗️</div>
@@ -433,13 +395,13 @@ function checkPw() {
     </div>
     <div class="feat-card c-cyan">
       <div class="fc-icon">📋</div>
-      <h3>Reporte mensual</h3>
-      <p>Cuántas personas escribieron, cuántos pidieron, cuánto costó cada pedido y qué viene el mes siguiente.</p>
+      <h3>Seguimiento semanal</h3>
+      <p>Cada semana te cuento cómo van las campañas: cuántos escribieron, cuántos pidieron y qué ajustamos. Sin tecnicismos.</p>
     </div>
     <div class="feat-card c-cyan">
       <div class="fc-icon">📊</div>
-      <h3>Revisión de fotos fin de mes</h3>
-      <p>Las fotos que más convirtieron se potencian. Las que no funcionaron se reemplazan por otras nuevas.</p>
+      <h3>Revisión de fotos constante</h3>
+      <p>Semana a semana, las fotos que más convierten se potencian y las que no funcionan se reemplazan por otras nuevas.</p>
     </div>
   </div>
 </section>
@@ -459,15 +421,15 @@ function checkPw() {
     <div class="web-option con-web" style="position:relative;">
       <div class="web-rec">⭐ Recomendado</div>
       <div class="wo-badge">Con web</div>
-      <div class="wo-price">$99.000</div>
+      <div class="wo-price">$119.000</div>
       <div class="wo-period">al mes · honorario total</div>
-      <div class="wo-desc">Incluye creación de la web + campañas Meta + creativos + optimización mensual + reporte.</div>
+      <div class="wo-desc">Incluye creación de la web + campañas Meta + creativos + optimización semanal + reporte.</div>
     </div>
     <div class="web-option sin-web">
       <div class="wo-badge">Sin web</div>
-      <div class="wo-price">$75.000</div>
+      <div class="wo-price">$95.000</div>
       <div class="wo-period">al mes · honorario total</div>
-      <div class="wo-desc">Solo campañas Meta + creativos + optimización mensual + reporte. Los anuncios llevan directo a WhatsApp.</div>
+      <div class="wo-desc">Solo campañas Meta + creativos + optimización semanal + reporte. Los anuncios llevan directo a tu WhatsApp.</div>
     </div>
   </div>
 
@@ -517,7 +479,7 @@ function checkPw() {
       </div>
     </div>
   </div>
-  <p style="margin-top:20px; font-size:13px; color:var(--mute2); text-align:center;">Contrato de 3 meses con renovación. Después puede cancelar con 30 días de aviso.</p>
+  <p style="margin-top:20px; font-size:13px; color:var(--mute2); text-align:center;">Mes a mes, sin permanencia. Puedes cancelar cuando quieras avisando con 30 días.</p>
 </section>
 
 </div><!-- /wrap -->
@@ -540,11 +502,12 @@ function checkPw() {
 
 <!-- CTA -->
 <div class="cta-section">
-  <div class="cta-rec-label">🥚 Huevos del Calle Calle</div>
+  <div class="cta-rec-label">📈 Meta Ads · Conejeros IA</div>
   <h2>¿Arrancamos con<br>el <em>Plan Delivery</em>?</h2>
   <p>Tienes el producto, tienes el delivery.<br>Solo falta el combustible para que lleguen más pedidos cada mes.</p>
   <div class="cta-btns">
-    <a href="mailto:lukas.conejero40@gmail.com?subject=Meta Ads Calle Calle - Con Web&body=Hola Lukas, quiero arrancar con el Plan Delivery con web." class="btn-pro">🌐 Quiero el plan con web · $99.000/mes</a>
+    <a href="mailto:lukas.conejero40@gmail.com?subject=Meta Ads - Plan con web&body=Hola Lukas, quiero arrancar con el Plan Delivery con web." class="btn-pro">🌐 Con web · $119.000/mes</a>
+    <a href="mailto:lukas.conejero40@gmail.com?subject=Meta Ads - Plan sin web&body=Hola Lukas, quiero arrancar con el Plan Delivery sin web." class="btn-pro" style="background:linear-gradient(135deg,#334155,#475569); box-shadow:0 4px 20px rgba(71,85,105,.3);">💬 Sin web · $95.000/mes</a>
   </div>
   <div style="margin-bottom:28px;">
     <button onclick="abrirModal()" class="btn-dudas">💬 Tengo preguntas primero</button>
@@ -561,7 +524,7 @@ function checkPw() {
   function enviarDuda() {
     var texto = document.getElementById('dudaTexto').value.trim();
     if (!texto) { document.getElementById('dudaTexto').focus(); return; }
-    window.open('https://wa.me/56999066071?text=' + encodeURIComponent('Hola Lukas, tengo una pregunta sobre la propuesta de Meta Ads para Huevos del Calle Calle:\n\n' + texto), '_blank');
+    window.open('https://wa.me/56999066071?text=' + encodeURIComponent('Hola Lukas, tengo una pregunta sobre la propuesta de Meta Ads:\n\n' + texto), '_blank');
     cerrarModal();
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
